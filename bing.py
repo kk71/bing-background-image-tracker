@@ -62,7 +62,7 @@ def get_image_and_text():
     # return text result
     result=""
     for num in text:
-        result+=text[num][0]+"\r\n" # \r\n for windows line-ending.
+        result+="".join(text[num].values())+"\r\n" # \r\n for windows line-ending.
     return result
 
 
