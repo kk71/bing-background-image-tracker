@@ -2,7 +2,7 @@
 #coding=utf-8
 '''
 bing.com background image tracker
-lovely written for Kingky:)
+lovely written to Kingky:)
 '''
 
 import os
@@ -42,8 +42,12 @@ def get_image_and_text():
     # get image url
     try:
         imageUrl=re.compile(r"g_img=\{url:'(.*?)',id").findall(pageText)[0]
-        # since sometimes the url to the image is shortened and domain isn't included
-        # make sure the url is started with http, otherwise fix it.
+        # if the background is a animation(sometimes an mp4 file)
+        # the url may look like "//..."
+        if imageUrl[:2]=="//":
+           imageUrl="http:"+imageUrl
+        # otherwise if the shortened url isn't started with // or http
+        # add default header
         if not imageUrl[:4]=="http":
             imageUrl="http://cn.bing.com"+imageUrl
         imageContent=request.urlopen(imageUrl).read()
