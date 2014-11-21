@@ -76,14 +76,8 @@ def get_descriptions():
     :return:
     '''
     pageText=request.urlopen("http://cn.bing.com/cnhpm").read().decode()
-    today_photo_story=re.compile(r'class="sc_light" id="sh_cp" title="(.*?)"').findall(pageText)[0]
-    try:
-        # 2014-11-14:
-        # 该日的“今日图片故事”消失了，不知道是不是改版了还是特例。
-        photo_description=re.compile(r'<h3>今日图片故事</h3><a href="(.*?)" target="_blank" h="(.*?)">(.*?)</a>').findall(pageText)[0][2]
-    except:
-        photo_description=""
-    return "\r\n".join(["今日图片故事："+today_photo_story,photo_description])
+    descriptions=re.compile(r'alt="(.*?)" class="sc_light" id="sh_cp" h="ID=SERP,5006.1"><div><div id="sh_cp_in" class="hpcCopyInfo">').findall(pageText)[0]
+    return "\r\n".join([descriptions])
 
 
 if __name__=="__main__":
