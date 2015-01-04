@@ -76,7 +76,7 @@ def get_descriptions():
     :return:
     '''
     pageText=request.urlopen("http://cn.bing.com/cnhpm").read().decode()
-    descriptions=re.compile(r'alt="(.*?)" class="sc_light" id="sh_cp" h="ID=SERP,5006.1"><div><div id="sh_cp_in" class="hpcCopyInfo">').findall(pageText)[0]
+    descriptions=re.compile(r'alt="(.*?)" class="sc_light" id="sh_cp"').findall(pageText)[0]
     return "\r\n".join([descriptions])
 
 
