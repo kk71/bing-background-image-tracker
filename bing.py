@@ -75,9 +75,12 @@ def get_descriptions():
     get descriptions to today's story.
     :return:
     '''
-    pageText=request.urlopen("http://cn.bing.com/cnhpm").read().decode()
-    descriptions=re.compile(r'alt="(.*?)" class="sc_light" id="sh_cp"').findall(pageText)[0]
-    return "\r\n".join([descriptions])
+    try:
+        pageText=request.urlopen("http://cn.bing.com/cnhpm").read().decode()
+        descriptions=re.compile(r'alt="(.*?)" class="sc_light" id="sh_cp"').findall(pageText)[0]
+        return "\r\n".join([descriptions])
+    except:
+        return ""
 
 
 if __name__=="__main__":
